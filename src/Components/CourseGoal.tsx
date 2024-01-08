@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren} from 'react';
-type CourseGoalProps=PropsWithChildren<{Title:string}>
+type CourseGoalProps=PropsWithChildren<{Title:string,onDelete:(id:number)=>void,id:number}>
 
-const CourseGoal :FC<CourseGoalProps> = ({ Title,children}) => {
+const CourseGoal :FC<CourseGoalProps> = ({ Title,children,onDelete,id}) => {
  
 
   return (
@@ -9,7 +9,7 @@ const CourseGoal :FC<CourseGoalProps> = ({ Title,children}) => {
       <div >
         <h2>{Title}</h2>
         {children}
-        <button style={{ fontWeight: 'bold' }}>Delete</button>
+        <button onClick={()=>onDelete(id)}>Delete</button>
       </div>
     </article>
   );

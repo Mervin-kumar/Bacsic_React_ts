@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CourseGoal from "./Components/CourseGoal";
 import Header from './Components/Header';
+import CourseGoalList from './Components/CourseGoalList';
 export type CourseGoal={
   id:number,
   Title:string,
@@ -8,14 +9,18 @@ export type CourseGoal={
 }
 function App() {
   const [goals,setGoals]=useState<CourseGoal[]>([])
+  const handleRemove=(id:number)=>{
+    setGoals(prevGoal=>prevGoal.filter(goal=>goal.id!==id))
+
+  }
   const HandleGoals=()=>{
-setGoals((prevgoal)=>{
+setGoals((prevGoal)=>{
   const newGoal={
     id:Math.random(),
     Title:'Learn React +Typescript',
     Description:'Learn it from the ground up'
   }
-  return [...prevgoal,newGoal]
+  return [...prevGoal,newGoal]
 })
   }
   const bodyStyle: React.CSSProperties = {
@@ -33,7 +38,7 @@ setGoals((prevgoal)=>{
       </Header>
       <button onClick={HandleGoals}>Add goal</button>
      
-      
+      <CourseGoalList  goals={goals} onDeleteGoal={handleRemove} />
     </div>
   );
 }
